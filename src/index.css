@@ -1,3 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+
+*{
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 0.025em !important;
+  scroll-behavior: smooth !important;
+  box-sizing: border-box I !important;
+}
+.active{
+  background: transparent !important;
+  scale: 110% !important;
+  transition: all;
+  transition-duration: 0.5s;
+  color: #1C61E7!important;
+  font-weight: 700 !important;
+}
+ul > li :hover{
+  background: transparent !important;
+  scale: 110%;
+  transition: color,scale;
+  transition-duration: 300ms !important;
+  color: #1C61E7 !important;
+  font-weight: 700 !important;
+  border-radius: 50px !important;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

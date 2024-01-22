@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 const Container = ({children}) => {
     return (
         <div className="container mx-auto">
@@ -7,3 +8,6 @@ const Container = ({children}) => {
 };
 
 export default Container;
+Container.propTypes={
+    children:PropTypes.node
+}
