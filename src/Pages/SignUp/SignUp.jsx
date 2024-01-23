@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IoHomeOutline } from "react-icons/io5";
 import { GoEye, GoEyeClosed } from "react-icons/go";
 import useAxios from "../../Utility/Hooks/useAxios";
@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 const SignUp = () => {
     
     const axios = useAxios()
+    const navigate = useNavigate()
 
     // Toggle Show & Hide Password State
     const [showPassword, setShowPassword] = useState(true)
@@ -27,7 +28,7 @@ const SignUp = () => {
             userName: form.name.value,
             phoneNumber: form.phone.value,
             userEmail: form.email.value,
-            Password: form.password.value,
+            password: form.password.value,
         }
         console.log(userInfo);
         try {
@@ -35,7 +36,8 @@ const SignUp = () => {
     
             if (response.data.insertedId) {
                 console.log(response.data);
-                toast.success("Sign Up Successful", { id: toastId });
+                toast.success("Sign Up Successful Please Sign In", { id: toastId });
+                navigate('/signIn')
             } else if (response.data.message === "User Already Exist") {
                 toast.error("Email Already Exists", { id: toastId });
             }

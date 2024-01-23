@@ -1,11 +1,21 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { IoHomeOutline } from "react-icons/io5";
 import { GoEye, GoEyeClosed } from "react-icons/go";
+import useAxios from "../../Utility/Hooks/useAxios";
+import toast from "react-hot-toast";
+import useAuth from "../../Utility/Hooks/useAuth";
 
 const SignIn = () => {
+
+    const axios = useAxios()
+    const navigate = useNavigate()
+    const location = useLocation()
+    const { getSignInUserData, user } = useAuth()
+
+
     // Toggle Show & Hide Password State
-    const [showPassword, setShowPassword] = useState(true)
+    const [showPassword, setShowPassword] = useState(false)
     // Toggle Show & Hide Password Function
     const handleShowPassword = () => {
         setShowPassword(!showPassword)
@@ -14,12 +24,25 @@ const SignIn = () => {
     const [error, setError] = useState('')
     const handleSignIn = (e) => {
         e.preventDefault()
+        const toastId = toast.loading("SignIn In..")
         const form = e.target;
         const userData = {
-            email: form.email.value,
+            userEmail: form.email.value,
             password: form.password.value
         }
-        console.log(userData);
+        axios.patch('/signIn', userData)
+            .then(res => {
+                if (res.data.message === "No Account Found") {
+                    return toast.error("Invalid Email Address", { id: toastId })
+                } else if (res.data.message === "Password Doesn't Match Try Again") {
+                    return toast.error("Invalid Password Try Again", { id: toastId })
+                } else if (res.data.message === "User Credential Matched") {
+                    toast.success("Successfully Signed In", { id: toastId })
+                    getSignInUserData(form.email.value)
+                    form.reset()
+                    return navigate(location.state ? location.state : '/')
+                }
+            })
     }
     return (
         <div className="h-screen my-auto w-screen mx-auto">

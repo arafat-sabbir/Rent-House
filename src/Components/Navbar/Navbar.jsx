@@ -1,7 +1,11 @@
 import { Link, NavLink } from "react-router-dom";
 import Container from "../../Utility/Container/Container";
+import useAuth from "../../Utility/Hooks/useAuth";
 
 const Navbar = () => {
+
+    const {user,loading} = useAuth()
+    console.log(user);
     // Navigation Links 
     const NavLinks = <>
 
@@ -30,7 +34,9 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <Link to='/signIn' className="btn bg-black hover:bg-black border-4 text-white border-red-500">Sign In</Link>
+                   {
+                    user?(<p>{user?.userName}</p>):( <Link to='/signIn' className="btn bg-black hover:bg-black border-y-4 text-white border-red-500">Sign In</Link>)
+                   }
                 </div>
             </nav>
         </Container>
