@@ -7,6 +7,7 @@ import Dashboard from "../Pages/Dashboard/Dashboard";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import AddNewHouse from "../Pages/Dashboard/AddNewHouse/AddNewHouse";
 import MyListedHouse from "../Pages/Dashboard/MyListedHouse/MyListedHouse";
+import UpdateRoom from "../Pages/Dashboard/MyListedHouse/UpdateRoom/UpdateRoom";
 
 const routes = createBrowserRouter([
     {
@@ -40,6 +41,10 @@ const routes = createBrowserRouter([
             {
                 path:'myListedHouse',
                 element:<MyListedHouse/>
+            },
+            {
+                path:'updateRoom/:id',
+                element:<UpdateRoom></UpdateRoom>
             }
         ]
     }
