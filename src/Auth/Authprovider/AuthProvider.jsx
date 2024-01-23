@@ -1,12 +1,10 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import PropTypes from 'prop-types';
 import useAxios from "../../Utility/Hooks/useAxios";
 
 export const Context = createContext(null)
 const AuthProvider = ({ children }) => {
     const axios = useAxios()
-
-    const [user, setUser] = useState("")
     const [loading, setLoading] = useState(true)
 
     // Get the logged In User Data From Database
@@ -15,17 +13,15 @@ const AuthProvider = ({ children }) => {
         setLoading(true);
         try {
             const response = await axios.get(`/getUserInfo?email=${email}`);
-            setUser(response.data);
-            setLoading(false);
-            
+            localStorage.setItem('user', JSON.stringify(response.data));
+
         } catch (error) {
             console.log(error);
         }
     }
     const contextValue = {
         getSignInUserData,
-        user,
-        loading,    
+        loading,
     }
     return (
         <Context.Provider value={contextValue}>

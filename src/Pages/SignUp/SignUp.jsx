@@ -6,9 +6,18 @@ import useAxios from "../../Utility/Hooks/useAxios";
 import toast from "react-hot-toast";
 
 const SignUp = () => {
-    
+
+    // console.log(useUserData());
+    const photo  = "https://i.ibb.co/KyvcDKK/22-223965-no-profile-picture-icon-circle-member-icon-png.png"
     const axios = useAxios()
     const navigate = useNavigate()
+
+    const [role, setRole] = useState();
+    const handleRole = (e) => {
+        setRole(e.target.value)
+    }
+
+    console.log(role);
 
     // Toggle Show & Hide Password State
     const [showPassword, setShowPassword] = useState(true)
@@ -20,7 +29,9 @@ const SignUp = () => {
 
     //  Manage The Error And Show To The User
     const [error, setError] = useState('')
-    const handleSubmit = async(e) => {
+
+    // Manage the user Sign Up
+    const handleSubmit = async (e) => {
         e.preventDefault()
         const toastId = toast.loading("SignUp Processing")
         const form = e.target;
@@ -29,13 +40,15 @@ const SignUp = () => {
             phoneNumber: form.phone.value,
             userEmail: form.email.value,
             password: form.password.value,
+            role,
+            photo,
+            creationDate:new Date().toDateString()
         }
-        console.log(userInfo);
+        // Send the User data to the Database
         try {
             const response = await axios.post('/signUp', userInfo);
-    
             if (response.data.insertedId) {
-                console.log(response.data);
+                // If Sign In Successful Navigate the user
                 toast.success("Sign Up Successful Please Sign In", { id: toastId });
                 navigate('/signIn')
             } else if (response.data.message === "User Already Exist") {
@@ -58,6 +71,7 @@ const SignUp = () => {
                         <div className="card-body">
                             <form onSubmit={handleSubmit}>
                                 <div className="flex gap-4">
+                                    {/* User Name */}
                                     <div className="form-control w-full">
                                         <label className="label">
                                             <span className="label-text text-black">Name</span>
@@ -70,6 +84,7 @@ const SignUp = () => {
                                             required
                                         />
                                     </div>
+                                    {/* Phone Number */}
                                     <div className="form-control w-full">
                                         <label className="label">
                                             <span className="label-text text-black">Phone Number</span>
@@ -84,6 +99,7 @@ const SignUp = () => {
                                     </div>
                                 </div>
                                 <div className="flex gap-4">
+                                    {/* Email */}
                                     <div className="form-control w-full">
                                         <label className="label">
                                             <span className="label-text text-black">Email</span>
@@ -96,6 +112,7 @@ const SignUp = () => {
                                             required
                                         />
                                     </div>
+                                    {/* Password */}
                                     <div className="form-control w-full">
                                         <label className="label">
                                             <span className="label-text text-black">Password</span>
@@ -120,6 +137,21 @@ const SignUp = () => {
                                         </div>
                                     </div>
                                 </div>
+                                <label className="form-control w-full ">
+                                    <div className="label">
+                                        <span className="label-text">
+                                            Your Role
+                                        </span>
+                                    </div>
+                                    <select required defaultValue="" onChange={handleRole} className="select select-bordered border border-black focus:border-main rounded-sm focus:outline-none">
+                                        <option disabled value="">
+                                            Select Your Role
+                                        </option>
+                                        <option>House Owner</option>
+                                        <option>House Renter</option>
+                                    </select>
+
+                                </label>
 
                                 <div className="form-control mt-6">
                                     <button
