@@ -4,10 +4,14 @@ import Home from "../Pages/Home/Home";
 import SignIn from "../Pages/SignIn/SignIn";
 import SignUp from "../Pages/SignUp/SignUp";
 import Dashboard from "../Pages/Dashboard/Dashboard";
+import ErrorPage from "../Pages/ErrorPage/ErrorPage";
+import AddNewHouse from "../Pages/Dashboard/AddNewHouse/AddNewHouse";
+import MyListedHouse from "../Pages/Dashboard/MyListedHouse/MyListedHouse";
 
 const routes = createBrowserRouter([
     {
         path:'/',
+        errorElement:<ErrorPage/>,
         element:<MainLayout></MainLayout>,
         children:[
             {
@@ -26,7 +30,18 @@ const routes = createBrowserRouter([
     },
     {
         path:'/dashboard',
-        element:<Dashboard></Dashboard>
+        errorElement:<ErrorPage/>,
+        element:<Dashboard></Dashboard>,
+        children:[
+            {
+                path:'addNewHouse',
+                element:<AddNewHouse/>
+            },
+            {
+                path:'myListedHouse',
+                element:<MyListedHouse/>
+            }
+        ]
     }
 ])
 

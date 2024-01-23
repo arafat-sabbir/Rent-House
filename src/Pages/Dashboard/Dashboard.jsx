@@ -56,13 +56,13 @@ const Dashboard = () => {
               {/* User info */}
               <div className="flex mt-8 gap-2 items-center">
               <img
-                src={user?.photoURL}
+                src={user?.photo}
                 className="h-14 w-14  rounded-full mx-auto "
                 alt=""
               />
               <div>
               <h1 className="font-semibold text-xl mt-2">
-                {user?.displayName}
+                {user?.userName}
               </h1>
               <h3>{user.creationDate}</h3>
               </div>
@@ -80,35 +80,35 @@ const Dashboard = () => {
                 <button  className="w-full text-lg font-bold  flex justify-center gap-2 text-green-700 p-2 rounded-sm mt-2 left-80 hover:bg-red-100 hover:text-black transition-all duration-300 top-10">
                     <span className="text-2xl">
                       <BiLogOutCircle />
-                    </span>{" "}
+                    </span>
                     Sign Out
                   </button>
               </div>
             </div>
             {/* Routes Based on Role */}
             {/* Global Route */}
-            <NavLink to={"/dashboard/profile"}>
+            {/* <NavLink to={"/dashboard/profile"}>
                   <button className="text-center py-2 bg-red-100 px-12  flex items-center mt-10 justify-center text-[15px] font-medium min-w-full">
                     <CgProfile className="mr-4 text-lg"></CgProfile>Profile
                   </button>
-                </NavLink>
+                </NavLink> */}
             {user?.role === "House Owner" ? (
               <>
-                <NavLink to={"/dashboard/addJob"}>
+                <NavLink to={"/dashboard/addNewHouse"}>
                   <button className="text-center py-2 bg-red-100 px-12  flex items-center mt-10 justify-center text-[15px] font-medium min-w-full">
-                    <IoAddSharp className="mr-4 text-lg"></IoAddSharp> Add Job
+                    <IoAddSharp className="mr-4 text-lg"></IoAddSharp> Add New House
                   </button>
                 </NavLink>
-                <NavLink to={"/dashboard/myPostedJob"}>
+                <NavLink to={"/dashboard/myListedHouse"}>
                   <button className="text-center py-2 bg-red-100 px-12  flex items-center mt-10 justify-center text-[15px] font-medium min-w-full">
-                    <FaListOl className="mr-4"></FaListOl> My Posted job
+                    <FaListOl className="mr-4"></FaListOl> My Listed House
                   </button>
                 </NavLink>
-                <NavLink to={"/dashboard/bidRequest"}>
+                {/* <NavLink to={"/dashboard/bidRequest"}>
                   <button className="text-center py-2 bg-red-100 px-12  flex items-center mt-10 justify-center text-[15px] font-medium min-w-full">
                     <FaCodePullRequest className="mr-4"></FaCodePullRequest> Bid Requests
                   </button>
-                </NavLink>
+                </NavLink> */}
               </>
             ) : user.role==="House Renter"?(
               <>
