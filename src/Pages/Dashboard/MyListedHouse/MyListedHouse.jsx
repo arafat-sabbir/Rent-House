@@ -18,9 +18,7 @@ const MyListedHouse = () => {
             return res.data;
         }
     })
-    const handleUpdate = (id)=>{
-        console.log("update",id);
-    }
+
     const handleDelete = (id) => {
         Swal.fire({
           title: "Are you sure?",
@@ -42,15 +40,6 @@ const MyListedHouse = () => {
           }
         });
       };
-    // const handleDelete=(id)=>{
-    //     const toastId = toast.loading("Deleting House")
-    //     axios.delete(`/deleteRoom/${id}`)
-    //     .then(res=>{
-    //         if(res.data.deletedCount<0){
-    //             toast.success("House Deleted SuccessFully",{id:toastId})
-    //         }
-    //     })
-    // }
     return (
         <div className="w-[90%] mx-auto">
             <h1 className="text-3xl font-semibold text-center tracking-wider my-16">Your Listed House</h1>

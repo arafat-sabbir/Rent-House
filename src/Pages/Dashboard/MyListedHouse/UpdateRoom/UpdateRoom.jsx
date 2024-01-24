@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import { useState } from "react";
 
 const UpdateRoom = () => {
-    const [phoneNumberError, setPhoneNumberError] = useState("");
+    const [phoneNumberError] = useState("");
     const { id } = useParams()
     const navigate = useNavigate()
     const axios = useAxios()

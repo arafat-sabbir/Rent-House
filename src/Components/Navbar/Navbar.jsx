@@ -65,19 +65,19 @@ const [loggedOut,setLoggedOut] = useState(false)
                                         {user?.userEmail}
                                     </p>
                                     <div className="pb-2 mx-auto">
-                                        <button
-                                        onClick={handleSignOut}
-                                            className="btn hover:bg-main bg-main border-none rounded-sm text-white"
-                                        >
-                                            Sign Out
-                                        </button>
+                                       
                                     </div>
                                 </ul>
                             )}
                         </label>
                     </div>
                     {
-                        !user.userEmail && <Link to='/signIn' className="btn bg-black hover:bg-black border-y-4 text-white border-red-500">Sign In</Link>
+                        !user.userEmail ?<Link to='/signIn' className="btn bg-black hover:bg-black border-y-4 text-white border-main">Sign In</Link>: <button
+                        onClick={handleSignOut}
+                            className="btn hover:bg-main bg-main border-none rounded-sm text-white"
+                        >
+                            Sign Out
+                        </button>
                     }
 
                 </div>

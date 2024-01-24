@@ -16,7 +16,7 @@ const HousesCard = ({ item }) => {
                         <img src={item.roomPicture} alt="" className="block object-cover object-center w-full rounded-md h-72 dark:bg-gray-500" />
                         <div className="flex justify-between items-center text-md">
                             <span className="font-medium">Available Till : {item.availabilityDate}</span>
-                            <p>Rent Per Month : {item.rentPerMonth}</p>
+                            <p>Rent Per Month : ${item.rentPerMonth}</p>
                         </div>
                     </div>
                     <div className="space-y-2">

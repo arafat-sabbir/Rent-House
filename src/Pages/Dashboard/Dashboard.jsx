@@ -1,9 +1,8 @@
 import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 import { FaListCheck } from "react-icons/fa6";
 import { IoReturnUpBack } from "react-icons/io5";
-import { FaListUl, FaListOl, FaCodePullRequest } from "react-icons/fa6";
+import { FaListUl, FaListOl } from "react-icons/fa6";
 import { BiLogOutCircle } from "react-icons/bi";
-import { CgProfile } from "react-icons/cg";
 import { IoAddSharp } from "react-icons/io5";
 import useUserData from "../../Utility/Hooks/useUserData";
 import useAuth from "../../Utility/Hooks/useAuth";
@@ -89,11 +88,6 @@ const Dashboard = () => {
             </div>
             {/* Routes Based on Role */}
             {/* Global Route */}
-            {/* <NavLink to={"/dashboard/profile"}>
-                  <button className="text-center py-2 bg-red-100 px-12  flex items-center mt-10 justify-center text-[15px] font-medium min-w-full">
-                    <CgProfile className="mr-4 text-lg"></CgProfile>Profile
-                  </button>
-                </NavLink> */}
             {user?.role === "House Owner" ? (
               <>
                 <NavLink to={"/dashboard/addNewHouse"}>
@@ -106,11 +100,6 @@ const Dashboard = () => {
                     <FaListOl className="mr-4"></FaListOl> My Listed House
                   </button>
                 </NavLink>
-                {/* <NavLink to={"/dashboard/bidRequest"}>
-                  <button className="text-center py-2 bg-red-100 px-12  flex items-center mt-10 justify-center text-[15px] font-medium min-w-full">
-                    <FaCodePullRequest className="mr-4"></FaCodePullRequest> Bid Requests
-                  </button>
-                </NavLink> */}
               </>
             ) : user?.role === "House Renter" ? (
               <>

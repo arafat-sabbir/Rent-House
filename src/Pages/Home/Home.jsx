@@ -6,19 +6,15 @@ import { useState } from "react";
 const Home = () => {
   const axios = useAxios()
   const [priceSort, setPriceSort] = useState("");
+  const [bedrooms,setBedrooms] = useState()
   const [searchText, setSearchText] = useState("");
-  const [minPrice, setMinPrice] = useState("");
-  const [maxPrice, setMaxPrice] = useState("");
-  const { data: houses, isLoading, isPending } = useQuery({
+  const { data: houses, isLoading } = useQuery({
     queryKey: ['houses', searchText,priceSort],
     queryFn: async () => {
       const res = await axios.get(`/houses?search=${searchText}&sort=${priceSort}`)
       return res.data
     }
   })
-  const handlePriceRange = () => {
-
-  }
   const handleSearch = (e) => {
     const searchText = e.target.value;
     setSearchText(searchText);
@@ -31,10 +27,24 @@ const Home = () => {
       setPriceSort("desc");
     }
   };
+  const handlePriceRange = (e) => {
+    const numberOfBedrooms = e.target.value;
+    if (numberOfBedrooms === "2") {
+      setBedrooms(2)
+    } else if (numberOfBedrooms === "4") {
+      setBedrooms(4)
+    } else if (numberOfBedrooms === "6") {
+      setBedrooms(6)
+    } else if (numberOfBedrooms === "8") {
+     setBedrooms(8)
+    } else if (numberOfBedrooms === "10") {
+     setBedrooms(10)
+    }
+  };
 
   return (
-    <div className=" mt-40 container mx-auto">
-      <p className="text-3xl font-semibold text-center mb-20">Our Best Property</p>
+    <div className=" container mx-auto">
+      <p className="text-3xl font-semibold text-center my-20">Our Best Property</p>
       <div className="flex justify-center items-center gap-2 my-20">
         <input
           onChange={handleSearch}
@@ -56,15 +66,13 @@ const Home = () => {
           className="select select-bordered lg:w-auto w-[20vw] font-bold border-main focus:border-main rounded-full  join-item"
         >
           <option className="font-bold " disabled selected>
-            Search By Price Range
+            Number Of BedRoom
           </option>
-          <option>$50000-$100000</option>
-          <option>$100000-$200000</option>
-          <option>$200000-$400000</option>
-          <option>$400000-$600000</option>
-          <option>$600000-$800000</option>
-          <option>$800000-$900000</option>
-          <option>$900000-$1000000</option>
+          <option>2</option>
+          <option>4</option>
+          <option>6</option>
+          <option>8</option>
+          <option>10</option>
         </select>
       </div>
 
