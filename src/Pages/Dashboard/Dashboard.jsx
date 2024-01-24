@@ -1,26 +1,28 @@
-import { Link, NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 import { FaListCheck } from "react-icons/fa6";
 import { IoReturnUpBack } from "react-icons/io5";
-import { FaListUl,FaListOl,FaCodePullRequest  } from "react-icons/fa6";
+import { FaListUl, FaListOl, FaCodePullRequest } from "react-icons/fa6";
 import { BiLogOutCircle } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
 import { IoAddSharp } from "react-icons/io5";
 import useUserData from "../../Utility/Hooks/useUserData";
+import useAuth from "../../Utility/Hooks/useAuth";
+import { useState } from "react";
 
 
 const Dashboard = () => {
   const user = useUserData()
-//   const handleSignOut = () => {
-//     signOutUser()
-//       .then((result) => {
-//         console.log(result);
-//       })
-//       .catch((error) => {
-//         console.log(error);
-//       });
-//   };
+  const navigate = useNavigate()
+  const [loggedOut, setLoggedOut] = useState(false)
+  const { signOut } = useAuth()
+  const handleSignOut = () => {
+    signOut()
+    setLoggedOut(!loggedOut)
+    navigate('/')
+  };
+
   return (
-    <div className="flex">
+    <div className="flex" key={loggedOut}>
       <div className="drawer lg:drawer-open ">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content !h-full">
@@ -55,17 +57,17 @@ const Dashboard = () => {
               </Link>
               {/* User info */}
               <div className="flex mt-8 gap-2 items-center">
-              <img
-                src={user?.photo||"https://i.ibb.co/KyvcDKK/22-223965-no-profile-picture-icon-circle-member-icon-png.png"}
-                className="h-14 w-14  rounded-full mx-auto "
-                alt=""
-              />
-              <div>
-              <h1 className="font-semibold text-xl mt-2">
-                {user?.userName}
-              </h1>
-              <h3>{user?.creationDate}</h3>
-              </div>
+                <img
+                  src={user?.photo || "https://i.ibb.co/KyvcDKK/22-223965-no-profile-picture-icon-circle-member-icon-png.png"}
+                  className="h-14 w-14  rounded-full mx-auto "
+                  alt=""
+                />
+                <div>
+                  <h1 className="font-semibold text-xl mt-2">
+                    {user?.userName}
+                  </h1>
+                  <h3>{user?.creationDate}</h3>
+                </div>
               </div>
               {/* Navigation */}
               <div className="absolute bottom-4  w-full flex flex-col items-center">
@@ -74,15 +76,15 @@ const Dashboard = () => {
                     <span className="text-2xl">
                       <IoReturnUpBack />
                     </span>
-                     Home
+                    Home
                   </button>
                 </Link>
-                <button  className="w-full text-lg font-bold  flex justify-center gap-2 text-main p-2 rounded-sm mt-2 left-80 hover:bg-red-100 hover:text-black transition-all duration-300 top-10">
-                    <span className="text-2xl">
-                      <BiLogOutCircle />
-                    </span>
-                    Sign Out
-                  </button>
+                <button onClick={handleSignOut} className="w-full text-lg font-bold  flex justify-center gap-2 text-main p-2 rounded-sm mt-2 left-80 hover:bg-red-100 hover:text-black transition-all duration-300 top-10">
+                  <span className="text-2xl">
+                    <BiLogOutCircle />
+                  </span>
+                  Sign Out
+                </button>
               </div>
             </div>
             {/* Routes Based on Role */}
@@ -110,7 +112,7 @@ const Dashboard = () => {
                   </button>
                 </NavLink> */}
               </>
-            ) : user?.role==="House Renter"?(
+            ) : user?.role === "House Renter" ? (
               <>
                 <NavLink to={"/dashboard/myBookedHouse"}>
                   <button className="text-center py-2 bg-red-100 px-12  flex items-center mt-10 justify-center text-[15px] font-medium min-w-full">
@@ -118,7 +120,7 @@ const Dashboard = () => {
                   </button>
                 </NavLink>
               </>
-            ):''}
+            ) : ''}
           </div>
         </div>
       </div>

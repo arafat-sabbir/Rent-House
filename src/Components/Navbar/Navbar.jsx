@@ -2,21 +2,21 @@ import { Link, NavLink } from "react-router-dom";
 import Container from "../../Utility/Container/Container";
 import useAuth from "../../Utility/Hooks/useAuth";
 import useUserData from "../../Utility/Hooks/useUserData";
+import { useState } from "react";
 
 const Navbar = () => {
-
-    const { loading,signOut } = useAuth()
+const [loggedOut,setLoggedOut] = useState(false)
+    const { signOut } = useAuth()
     const handleSignOut = () => {
         signOut()
+        setLoggedOut(!loggedOut)
     }
     const user = useUserData()
-    console.log(user); 
     // Navigation Links 
     const NavLinks = <>
 
         <li><NavLink to={'/'}>Home</NavLink></li>
-        <li><NavLink to={'/ami'}>Ami</NavLink></li>
-        <li><NavLink to={'/dashboard'}>Dashboard</NavLink></li>
+        <li><NavLink to={`${user.role==="House Owner"?"/dashboard/myListedHouse":'/dashboard/myBookedHouse'}`}>Dashboard</NavLink></li>
 
     </>
     return (
@@ -31,7 +31,10 @@ const Navbar = () => {
                             {NavLinks}
                         </ul>
                     </div>
-                    <a className="text-xl">Rent Hunter</a>
+                 <Link to={'/'} className="flex justify-center items-center gap-2">
+                    <img className="h-12 w-12" src="https://i.ibb.co/hLg6XWx/Untitled-design-3.png" alt="" />
+                 <p to={'/'} className="text-xl font-semibold">Rent Hunter</p>
+                 </Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">

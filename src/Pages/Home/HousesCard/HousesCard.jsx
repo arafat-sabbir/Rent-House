@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
-import { MdOutlineVerified } from "react-icons/md";
+import PropTypes from 'prop-types';
 
 const HousesCard = ({ item }) => {
     return (
         <>
-            <div className="max-w-lg p-4 shadow-[0_0_50px_#EBE8E8] rounded-sm dark:bg-gray-900 dark:text-gray-100">
+            <div className="max-w-lg w-[512px] p-4 shadow-[0_0_50px_#EBE8E8] rounded-sm dark:bg-gray-900 dark:text-gray-100">
                 <div className="flex justify-between pb-4 border-bottom">
                     <div className="flex items-center">
                         <p className="mb-0 capitalize dark:text-gray-100 font-medium">{item.city}</p>
@@ -14,8 +14,9 @@ const HousesCard = ({ item }) => {
                 <div className="space-y-4">
                     <div className="space-y-2">
                         <img src={item.roomPicture} alt="" className="block object-cover object-center w-full rounded-md h-72 dark:bg-gray-500" />
-                        <div className="flex items-center text-md">
+                        <div className="flex justify-between items-center text-md">
                             <span className="font-medium">Available Till : {item.availabilityDate}</span>
+                            <p>Rent Per Month : {item.rentPerMonth}</p>
                         </div>
                     </div>
                     <div className="space-y-2">
@@ -29,7 +30,7 @@ const HousesCard = ({ item }) => {
                         </div>
                         <div className="justify-between items-baseline flex">
                             <p className="font-medium">{item.address}</p>
-                            <p className="font-medium">Owner Number : {item.phoneNumber}</p>
+                            <p className="font-medium">Phone : {item.phoneNumber}</p>
                         </div>
                     </div>
                 </div>
@@ -39,3 +40,7 @@ const HousesCard = ({ item }) => {
 };
 
 export default HousesCard;
+
+HousesCard.propTypes={
+    item:PropTypes.node
+}

@@ -1,4 +1,4 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
+import {  useNavigate, useParams } from "react-router-dom";
 import useAxios from "../../../Utility/Hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
 import useUserData from "../../../Utility/Hooks/useUserData";
@@ -30,8 +30,12 @@ const HouseDetail = () => {
                 houseData,
                 userEmail
             }
-            axios.post('/addBookings',houseDetail)
+            axios.post(`/addBookings?email=${userEmail}`,houseDetail)
             .then(res=>{
+                console.log(res.data);
+                if(res.data.message){
+                    toast.error(res.data.message,{id:toastId})
+                }
                 if(res.data.insertedId){
                     toast.success("House Booked SuccessFully",{id:toastId})
                 }
