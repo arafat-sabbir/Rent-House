@@ -13,12 +13,7 @@ const AddNewHouse = () => {
   
   const user = useUserData();
   const navigate = useNavigate();
-  const [category, setCategory] = useState("");
-  const handleCategory = (e) => {
-    const category = e.target.value;
-    setCategory(category);
-  };
-  const handleAddRoom = (e) => {
+  const handleAddHouse = (e) => {
     e.preventDefault();
     const toastId = toast.loading("Adding Room")
     const form = e.target;
@@ -32,7 +27,7 @@ const AddNewHouse = () => {
     else {
       setPhoneNumberError("");
     }
-    const roomData = {
+    const houseData = {
       name: form.name.value,
       userEmail:user.userEmail,
       city: form.city.value,
@@ -46,7 +41,7 @@ const AddNewHouse = () => {
       phoneNumber: form.phone.value,
       roomDescription: form.description.value
     }
-    axios.post("/addRoom", roomData)
+    axios.post("/addRoom", houseData)
     .then(data=>{
       if (data.data.acknowledged) {
         navigate('/dashboard/myListedHouse')
@@ -63,7 +58,7 @@ const AddNewHouse = () => {
       <Helmet>
         <title>Rent-Hunter | Add Jobs</title>
       </Helmet>
-      <AddRoomForm phoneNumberError={phoneNumberError} handleAddRoom={handleAddRoom} handleCategory={handleCategory}></AddRoomForm>
+      <AddRoomForm phoneNumberError={phoneNumberError} handleAddHouse={handleAddHouse} ></AddRoomForm>
     </div>
   );
 };

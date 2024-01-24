@@ -56,7 +56,7 @@ const Dashboard = () => {
               {/* User info */}
               <div className="flex mt-8 gap-2 items-center">
               <img
-                src={user?.photo}
+                src={user?.photo||"https://i.ibb.co/KyvcDKK/22-223965-no-profile-picture-icon-circle-member-icon-png.png"}
                 className="h-14 w-14  rounded-full mx-auto "
                 alt=""
               />
@@ -64,20 +64,20 @@ const Dashboard = () => {
               <h1 className="font-semibold text-xl mt-2">
                 {user?.userName}
               </h1>
-              <h3>{user.creationDate}</h3>
+              <h3>{user?.creationDate}</h3>
               </div>
               </div>
               {/* Navigation */}
               <div className="absolute bottom-4  w-full flex flex-col items-center">
                 <Link to={"/"} className="w-full">
-                  <button className="text-lg font-bold  flex justify-center gap-2 text-green-700 p-2 rounded-sm mt-2 left-80 hover:bg-red-100 w-full hover:text-black transition-all duration-300 top-10">
+                  <button className="text-lg font-bold  flex justify-center gap-2 text-main p-2 rounded-sm mt-2 left-80 hover:bg-red-100 w-full hover:text-black transition-all duration-300 top-10">
                     <span className="text-2xl">
                       <IoReturnUpBack />
                     </span>
                      Home
                   </button>
                 </Link>
-                <button  className="w-full text-lg font-bold  flex justify-center gap-2 text-green-700 p-2 rounded-sm mt-2 left-80 hover:bg-red-100 hover:text-black transition-all duration-300 top-10">
+                <button  className="w-full text-lg font-bold  flex justify-center gap-2 text-main p-2 rounded-sm mt-2 left-80 hover:bg-red-100 hover:text-black transition-all duration-300 top-10">
                     <span className="text-2xl">
                       <BiLogOutCircle />
                     </span>
@@ -110,16 +110,11 @@ const Dashboard = () => {
                   </button>
                 </NavLink> */}
               </>
-            ) : user.role==="House Renter"?(
+            ) : user?.role==="House Renter"?(
               <>
-              <NavLink to={"/dashboard/myBids"}>
+                <NavLink to={"/dashboard/myBookedHouse"}>
                   <button className="text-center py-2 bg-red-100 px-12  flex items-center mt-10 justify-center text-[15px] font-medium min-w-full">
-                    <FaListCheck className="mr-4"></FaListCheck> My Bids
-                  </button>
-                </NavLink>
-                <NavLink to={"/dashboard/bookmarks"}>
-                  <button className="text-center py-2 bg-red-100 px-12  flex items-center mt-10 justify-center text-[15px] font-medium min-w-full">
-                    <FaListCheck className="mr-4"></FaListCheck> Bookmarks
+                    <FaListCheck className="mr-4"></FaListCheck> My Booked House
                   </button>
                 </NavLink>
               </>

@@ -1,12 +1,11 @@
-import { useState } from "react";
-
-const AddRoomForm = ({ handleCategory, handleAddRoom,phoneNumberError }) => {
+// eslint-disable-next-line react/prop-types
+const AddRoomForm = ({  handleAddHouse,phoneNumberError }) => {
 
  
 
   return (
     <form
-      onSubmit={handleAddRoom}
+      onSubmit={handleAddHouse}
       className="flex lg:w-1/2 w-[90vw] mt-10 space-y-6 mx-auto p-16  flex-col justify-center shadow-[0_0_50px_#EDEDED]"
     >
       <h3 className=" font-semibold text-3xl text-center">Add New House</h3>
@@ -132,6 +131,7 @@ const AddRoomForm = ({ handleCategory, handleAddRoom,phoneNumberError }) => {
           <input
             name="availabilityDate"
             type="date"
+            
             placeholder="Availability date"
             className="input rounded-sm bg-transparent text-black border border-gray-500 focus:ring-0 focus:outline-none placeholder:font-medium focus:border-main"
             required

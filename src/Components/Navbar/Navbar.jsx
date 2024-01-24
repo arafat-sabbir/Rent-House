@@ -5,12 +5,12 @@ import useUserData from "../../Utility/Hooks/useUserData";
 
 const Navbar = () => {
 
-    const { loading } = useAuth()
-    // const handleSignOut = () => {
-    //     return localStorage.removeItem('user');
-    // }
+    const { loading,signOut } = useAuth()
+    const handleSignOut = () => {
+        signOut()
+    }
     const user = useUserData()
-    console.log(user);
+    console.log(user); 
     // Navigation Links 
     const NavLinks = <>
 
@@ -24,7 +24,7 @@ const Navbar = () => {
             <nav className="navbar  mt-3">
                 <div className="navbar-start">
                     <div className="dropdown">
-                        <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+                        <div tabIndex={0}  className=" lg:hidden">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                         </div>
                         <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
@@ -41,14 +41,14 @@ const Navbar = () => {
                 <div className="navbar-end">
                     <div className="dropdown dropdown-bottom dropdown-end z-50 ">
                         <label tabIndex={0} className="">
-                            {user && (
+                            {user.userEmail && (
                                 <img
                                     className="w-12 mr-4 h-12  rounded-full border-2 border-main  "
                                     src={user?.photo || "https://i.ibb.co/KyvcDKK/22-223965-no-profile-picture-icon-circle-member-icon-png.png"}
                                     alt=""
                                 />
                             )}
-                            {user && (
+                            {user.userEmail && (
                                 <ul className="p-2 shadow menu dropdown-content bg-white   z-[50]  rounded-box w-56">
                                     <img
                                         className=" w-12 mx-auto  rounded-full mb-2 mt-2 border-2 border-main"
@@ -63,7 +63,8 @@ const Navbar = () => {
                                     </p>
                                     <div className="pb-2 mx-auto">
                                         <button
-                                            className="btn hover:bg-main bg-main border-none rounded-full text-white"
+                                        onClick={handleSignOut}
+                                            className="btn hover:bg-main bg-main border-none rounded-sm text-white"
                                         >
                                             Sign Out
                                         </button>
@@ -73,7 +74,7 @@ const Navbar = () => {
                         </label>
                     </div>
                     {
-                        !user && <Link to='/signIn' className="btn bg-black hover:bg-black border-y-4 text-white border-red-500">Sign In</Link>
+                        !user.userEmail && <Link to='/signIn' className="btn bg-black hover:bg-black border-y-4 text-white border-red-500">Sign In</Link>
                     }
 
                 </div>

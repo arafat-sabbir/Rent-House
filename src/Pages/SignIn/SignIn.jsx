@@ -32,13 +32,14 @@ const SignIn = () => {
         }
         axios.patch('/signIn', userData)
             .then(res => {
+                console.log(res.data.signIn);
                 if (res.data.message === "No Account Found") {
                     return toast.error("Invalid Email Address", { id: toastId })
                 } else if (res.data.message === "Password Doesn't Match Try Again") {
                     return toast.error("Invalid Password Try Again", { id: toastId })
-                } else if (res.data.message === "User Credential Matched") {
+                } else if (res.data.signIn) {
                     toast.success("Successfully Signed In", { id: toastId })
-                    getSignInUserData(form.email.value)
+                    getSignInUserData(res.data.loggedUserData)
                     form.reset()
                     return navigate(location.state ? location.state : '/')
                 }

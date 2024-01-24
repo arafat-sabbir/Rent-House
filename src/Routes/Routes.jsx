@@ -8,6 +8,8 @@ import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import AddNewHouse from "../Pages/Dashboard/AddNewHouse/AddNewHouse";
 import MyListedHouse from "../Pages/Dashboard/MyListedHouse/MyListedHouse";
 import UpdateRoom from "../Pages/Dashboard/MyListedHouse/UpdateRoom/UpdateRoom";
+import MyBookedHouse from "../Pages/Dashboard/MyBookedHouse.jsx/MyBookedHouse";
+import HouseDetail from "../Pages/Home/HouseDetail/HouseDetail";
 
 const routes = createBrowserRouter([
     {
@@ -18,6 +20,10 @@ const routes = createBrowserRouter([
             {
                 path:'/',
                 element:<Home/>
+            },
+            {
+                path:'houseDetail/:id',
+                element:<HouseDetail></HouseDetail>
             }
         ]
     },
@@ -45,6 +51,10 @@ const routes = createBrowserRouter([
             {
                 path:'updateRoom/:id',
                 element:<UpdateRoom></UpdateRoom>
+            },
+            {
+                path:'myBookedHouse',
+                element:<MyBookedHouse/>
             }
         ]
     }
